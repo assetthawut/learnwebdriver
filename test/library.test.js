@@ -5,6 +5,7 @@
 var webdriver = require('selenium-webdriver'),
     By = webdriver.By,
     until = webdriver.until,
+    assert = require('assert'),
     {describe,it,after,before} = require('selenium-webdriver/testing');
 
 var driver;
@@ -48,16 +49,18 @@ describe('Test Scenario ', function(){
     //this.timeout(15000);
             driver = new webdriver.Builder().forBrowser('chrome').build();
             driver.get('http://www.google.co.th');
+            
 
     });
 
  
 
-  it(' First ', function(done){
+  it(' It should return equal ', function(done){
     this.timeout(15000);
     setTimeout(done, 15000);
     driver.findElement(By.className("gb_P")).getText().then(function(txt){
                 console.log("Show text "+txt);
+                assert(txt == "Gmail");
             });
          done();
   });
@@ -67,10 +70,14 @@ describe('Test Scenario ', function(){
         setTimeout(done,15000);
         driver.findElement(By.id("_eEe")).getText().then(function(txt){
                 console.log("Return value : "+txt);
+               
         });
         done();
 
   });
+
+
+
 
 afterEach(function(){
             driver.quit();
